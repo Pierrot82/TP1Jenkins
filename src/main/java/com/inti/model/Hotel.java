@@ -31,5 +31,5 @@ public class Hotel {
 	
 	@ManyToOne
 	@JoinColumn(name = "idDestination")
-	Destination destination;
+	private Destination destination;
 }

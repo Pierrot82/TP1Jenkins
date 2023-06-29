@@ -32,6 +32,6 @@ public class Destination {
 	private long latitude;
 	
 	@OneToMany(mappedBy  = "destination")
-	List<Hotel> listeHotel;
+	private List<Hotel> listeHotel;
 
 }
