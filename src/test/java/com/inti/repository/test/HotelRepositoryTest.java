@@ -36,10 +36,11 @@ public class HotelRepositoryTest {
 		//GIVEN
 
 		//WHEN
-		ihr.save(h1);
+		Hotel hsave = ihr.save(h1);
 		//THEN
-		assertThat(h1).isNotNull();
-		assertThat(h1.getNom()).isEqualTo("IBIS Style");
+		assertThat(hsave).isNotNull();
+		assertThat(hsave.getNom()).isEqualTo("IBIS Style");
+		assertThat(hsave.getIdHotel()).isEqualTo(1);
 	}
 	
 	@Test
@@ -68,13 +69,14 @@ public class HotelRepositoryTest {
 	public void deleteHotelTest() {
 		
 		//GIVEN
-		Hotel h2 = ihr.save(h1);
+		Hotel hsave = ihr.save(h1);
 		
 		//WHEN
-		ihr.delete(h2);
+		ihr.delete(hsave);
+		
 
 		//THEN
-		assertThat(h2).isNull();
+		Assertions.assertThrows(Exception.class, () -> ihr.getReferenceById(hsave.getIdHotel()) );
 		
 	}
 	
