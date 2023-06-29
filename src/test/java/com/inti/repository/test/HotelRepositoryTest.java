@@ -17,6 +17,10 @@ import com.inti.repository.IHotelRepository;
 @DataJpaTest
 public class HotelRepositoryTest {
 	
+	/**
+	 * aaa
+	 */
+	
 	@Autowired
 	IHotelRepository ihr;
 	
@@ -60,18 +64,19 @@ public class HotelRepositoryTest {
 		
 	}
 	
-//	@Test
-//	public void deleteHotelTest() {
-//		
-//		//GIVEN
-//
-//		//WHEN
-//		ihr.delete(h1);
-//
-//		//THEN
-//		assertThat(h1).isNull();
-//		
-//	}
+	@Test
+	public void deleteHotelTest() {
+		
+		//GIVEN
+		Hotel h2 = ihr.save(h1);
+		
+		//WHEN
+		ihr.delete(h2);
+
+		//THEN
+		assertThat(h2).isNull();
+		
+	}
 	
 	
 
