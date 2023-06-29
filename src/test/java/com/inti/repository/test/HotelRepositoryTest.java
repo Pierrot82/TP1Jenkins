@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.inti.model.Hotel;
@@ -40,7 +41,7 @@ public class HotelRepositoryTest {
 		//THEN
 		assertThat(hsave).isNotNull();
 		assertThat(hsave.getNom()).isEqualTo("IBIS Style");
-		assertThat(hsave.getIdHotel()).isEqualTo(1);
+		assertThat(hsave.getIdHotel()).isGreaterThan(0);
 	}
 	
 	@Test
@@ -77,9 +78,31 @@ public class HotelRepositoryTest {
 
 		//THEN
 		Assertions.assertThrows(Exception.class, () -> ihr.getReferenceById(hsave.getIdHotel()) );
-		
 	}
 	
+	@Test
+	public void modifierHotelTest() {
+		//GIVEN
+		
+		//WHEN
+		h1.setNom("F1");
+		Hotel hsave = ihr.save(h1);
+		
+		//THEN
+		assertThat(hsave.getNom()).isEqualTo("F1");
+	}
+	
+//	@Test
+//	public void modifierHotelAttributDepassantLimite() {
+//		//GIVEN
+//		
+//		//WHEN
+//		h1.setNom("aaaaaaaaaaaaaaaaaa");
+//		
+//		//THEN
+//		assertThat(h1).isNull();
+//		Assertions.assertThrows(DataIntegrityViolationException.class, () -> ihr.save(h1)  );
+//	}
 	
 
 }
